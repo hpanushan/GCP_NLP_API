@@ -1,7 +1,9 @@
 from GoogleAPI import gcpNLP
+from Streaming import StdOutListener
 
 def main():
-    print(gcpNLP("She is not a good person"))
+    obj = StdOutListener()
+    obj.streamer()
 
 if __name__ == "__main__": 
     # calling main function 
