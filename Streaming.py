@@ -1,25 +1,34 @@
-from __future__ import absolute_import, print_function
-from tweepy import OAuthHandler, Stream, StreamListener
-import json
-
-from GoogleAPI import gcpNLP
+import tweepy
 import Credentials
+import json
+ 
+class StreamingClass():
 
-class StdOutListener(StreamListener):
-
-    def on_data(self, data):
-        dict_data = json.loads(data)                # Convert json object into dictionary object
-        tweet_text = dict_data["text"]              # Filter the text field from tweet object
-        sentiment = gcpNLP(tweet_text)              # Apply GCP NLP API method to tweet text
-        print(sentiment)
-        return True
-
-    def on_error(self, status):
-        print(status)
-
-    def streamer(self):
-        auth = OAuthHandler(Credentials.CONSUMER_KEY, Credentials.CONSUMER_KEY_SECRET)
+    def returnTweets(self,keyword="obama",n=10):
+        # OAuth process, using the keys and tokens
+        auth = tweepy.OAuthHandler(Credentials.CONSUMER_KEY, Credentials.CONSUMER_KEY_SECRET)
         auth.set_access_token(Credentials.ACCESS_TOKEN, Credentials.ACCESS_TOKEN_SECRET)
-        stream = Stream(auth, self)
-        stream.filter(track=['obama'])
+ 
+        # creation of the actual interface, using authentication
+        api = tweepy.API(auth)
 
+        search = tweepy.Cursor(api.search, q=keyword, result_type="recent").items(n)
+
+        return search     
+
+    def getUserName(self):
+        # The method to get user name of each  tweet object
+        iterabeTweetObject = self.returnTweets()
+        for i in iterabeTweetObject:
+            print(i.user.screen_name)
+
+    def getTweetText(self):
+        # The method to get tweet text of tweet objects
+        tweetText = []
+        iterabeTweetObject = self.returnTweets()
+        for i in iterabeTweetObject:
+            tweetText.append(i.text)
+        return tweetText
+
+obj = StreamingClass()
+print(obj.getUserName())
