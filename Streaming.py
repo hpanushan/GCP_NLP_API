@@ -3,8 +3,14 @@ import Credentials
 import json
  
 class StreamingClass():
+    #keyword = "obama"
+    #n = 10
+    def __init__(self,keyword,n):
+        # Constructor to define class variables
+        self.keyword = keyword
+        self.n = n
 
-    def returnTweets(self,keyword="obama",n=10):
+    def returnTweets(self):
         # OAuth process, using the keys and tokens
         auth = tweepy.OAuthHandler(Credentials.CONSUMER_KEY, Credentials.CONSUMER_KEY_SECRET)
         auth.set_access_token(Credentials.ACCESS_TOKEN, Credentials.ACCESS_TOKEN_SECRET)
@@ -12,7 +18,7 @@ class StreamingClass():
         # creation of the actual interface, using authentication
         api = tweepy.API(auth)
 
-        search = tweepy.Cursor(api.search, q=keyword, result_type="recent").items(n)
+        search = tweepy.Cursor(api.search, q=self.keyword, result_type="recent").items(self.n)
 
         return search     
 
@@ -30,5 +36,4 @@ class StreamingClass():
             tweetText.append(i.text)
         return tweetText
 
-obj = StreamingClass()
-print(obj.getUserName())
+
