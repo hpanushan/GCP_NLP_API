@@ -28,16 +28,18 @@
             </div>
             <div class="col-lg-6">
                 <div class="oneelement mt-5">
+                    <div class="oneresponce">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">User Name - 123407891234</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Scentiment Score</h6>
+                            {% for obj in analysis %}
+                            <h5 class="card-title">{{ obj[user_name] - obj[id]}}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{obj[sentiment_score]}}</h6>
                             <p class="card-text">
-                                Some quick example text to build on the card title and make up
-                                the bulk of the card's content.
+                                {{obj[text]}}
                             </p>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
         </div>
