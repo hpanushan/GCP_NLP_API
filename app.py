@@ -16,14 +16,14 @@ def renderIndex():
 @app.route('/getValue', methods=['POST'])
 def getValue():
     filter = request.form['filter']
-    
-    obj = StreamingClass("obama",20)
+
+    keyword = str(filter)
+    obj = StreamingClass(keyword,3)
     obj.findTweets()
 
     # Tweets data
     tweetIDList,tweetUserNameList,tweetTextList = obj.getDetails()
     ##### 
-    
     # Covert into JSON data format
     #dataDictionary = {}
     dataDictionary = []
@@ -32,7 +32,9 @@ def getValue():
         row["id"] = tweetIDList[i]
         row["userName"] = tweetUserNameList[i]
         row["text"] = tweetTextList[i]
-        row["sentiment"] = gcpNLP(tweetTextList[i])
+        try:
+            row["sentiment"] = gcpNLP(tweetTextList[i])
+        except: pass
     #    dataDictionary[str(i)] = row
         dataDictionary.append(row)
 
