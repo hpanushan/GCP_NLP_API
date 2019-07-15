@@ -32,8 +32,10 @@
                     <div class="card">
                         <div class="card-body">
                             {% for obj in analysis %}
-                            <h5 class="card-title">{{ obj[user_name]}}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">{{obj[sentiment_score]}}</h6>
+                            <h4 class="card-title">{{obj.userName}}</h4>
+                            <h5 class="card-subtitle mb-2 text-muted">{{obj.id}}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{obj.text}}</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">{{obj.sentiment}}</h6>
                             <p class="card-text">
                                 {{obj[text]}}
                             </p>
