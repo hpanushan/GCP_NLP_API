@@ -1,7 +1,6 @@
 from flask import Flask, jsonify, request, render_template
 from Streaming import StreamingClass
 from GoogleAPI import gcpNLP
-from main import main
 
 import tweepy
 import os
@@ -18,7 +17,7 @@ def getValue():
     filter = request.form['filter']
 
     keyword = str(filter)
-    obj = StreamingClass(keyword,3)
+    obj = StreamingClass(keyword,5)
     obj.findTweets()
 
     # Tweets data
@@ -34,7 +33,8 @@ def getValue():
         row["text"] = tweetTextList[i]
         try:
             row["sentiment"] = gcpNLP(tweetTextList[i])
-        except: pass
+        except: 
+            row["sentiment"] = "Language is not supported"
     #    dataDictionary[str(i)] = row
         dataDictionary.append(row)
 
