@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
 
-    <title>Anuva NLP</title>
+    <title>NLP</title>
 </head>
 
 <body>
@@ -32,7 +32,7 @@
                     <div class="card">
                         <div class="card-body">
                             {% for obj in analysis %}
-                            <h4 class="card-title">{{obj.userName}}</h4>
+                            <h4 class="card">{{obj.userName}}</h4>
                             <h5 class="card-subtitle mb-2 text-muted">{{obj.id}}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">{{obj.text}}</h6>
                             <h6 class="card-subtitle mb-2 text-muted">{{obj.sentiment}}</h6>
