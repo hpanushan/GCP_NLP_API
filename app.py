@@ -18,7 +18,7 @@ def getValue():
     filter = request.form['filter']
 
     keyword = str(filter)
-    obj = StreamingClass(keyword,10)
+    obj = StreamingClass(keyword,5)
     obj.findTweets()
 
     # Tweets data
