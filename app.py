@@ -17,7 +17,7 @@ def renderIndex():
 def getValue():
     filter = request.form['filter']
 
-    keyword = str(filter)
+    keyword = "@" + str(filter)
     obj = StreamingClass(keyword,5)
     obj.findTweets()
 
