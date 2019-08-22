@@ -1,12 +1,13 @@
-import twitter
+from tweepy import OAuthHandler, Stream, StreamListener
+import tweepy
 import Credentials
 
-def getTwitterID(screenName):
-    t = twitter.Twitter(auth=twitter.OAuth(Credentials.ACCESS_TOKEN, Credentials.ACCESS_TOKEN_SECRET, Credentials.CONSUMER_KEY, Credentials.CONSUMER_KEY_SECRET))
-    response = t.users.lookup(screen_name=screenName)
-    responseList = list(response)
-    userIDList = []
-    userIDList.append(str(responseList[0]['id']))
+def getTwitterID(screen_name):
+    auth = tweepy.OAuthHandler(Credentials.CONSUMER_KEY, Credentials.CONSUMER_KEY_SECRET)
+    auth.set_access_token(Credentials.ACCESS_TOKEN, Credentials.ACCESS_TOKEN_SECRET)
+    api = tweepy.API(auth)
 
-    return userIDList
+    userID = api.get_user(screen_name)
 
+    return userID.id
+    

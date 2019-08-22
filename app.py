@@ -18,7 +18,7 @@ def getValue():
     filter = request.form['filter']
 
     keyword = "@" + str(filter)
-    obj = StreamingClass(keyword,5)
+    obj = StreamingClass(keyword,10)
     obj.findTweets()
 
     # Tweets data
@@ -36,7 +36,7 @@ def getValue():
             row["sentiment"] = gcpNLP(tweetTextList[i])
         except: 
             row["sentiment"] = gcpNLP(langTranslator(tweetTextList[i]))
-    #    dataDictionary[str(i)] = row
+        #dataDictionary[str(i)] = row
         dataList.append(row)
 
     return render_template('index.html',analysis=dataList)
