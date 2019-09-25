@@ -15,7 +15,7 @@ def gcpNLP(text):
     # Getting respective sentment values
     sentiment = response.document_sentiment
 
-    return sentiment.score
+    return sentiment.score, sentiment.magnitude
 
-
+print(gcpNLP("Now you are giving what we need"))
 
